@@ -1,62 +1,41 @@
-class ButtonDecrement extends React.Component {
-
-    decrement() {
-        this.setState({
-            counter: this.state.counter - 1
-        });
-    }
-
-    render() {
-        console.log(this.props);
-        const { counter, onDecrement } = this.props;
-
-        return (
-            <button onClick={(event) => this.decrement()}>Decrementa</button>
-        );
-
-    }
-}
-
-// Primo componente di React
 class App extends React.Component {
-
-    constructor(){
-        super()
+    
+    constructor(props) {
+        super(props)
         this.state = {
-            counter: 0
-        };
+            count: 100,
+            clicked: false
+        }
     }
 
     increment() {
         this.setState({
-            counter: this.state.counter + 1
+          count: this.state.count + 1
         });
-    }
-    
-    render(){
-        
-        const { titolo, welcome } = this.props; 
-        const { counter } = this.state;
+      };
 
+    decrement() {
+        this.setState({
+        count: this.state.count - 1
+        });
+    };
+
+    reset() {
+        this.setState({
+        count: 0
+        });
+    };
+
+    render() {
         return (
-
-            <div id="app">
-                
-                <Header />
-                <AppHeader titolo={titolo} />
-                <p>{welcome}</p>
-                <button onClick={(event) => this.increment()}>Incrementa</button>
-                <ButtonDecrement counter={counter} onDecrement={(event) => this.decrement()} />
-                <div>
-                    <span>Contatore: </span>
-                    <span>{counter}</span>
-                </div>
-                
-                <Footer />
-                
+            <div>
+                <button className='inc' onClick={(e) => this.increment(e)}>Incrementa</button>
+                <button className='dec' onClick={(e) => this.decrement(e)}>Decrementa</button>
+                <button className='reset' onClick={(e) => this.reset(e)}>Reset</button>
+                <h1>Contatore: {this.state.count}</h1>
             </div>
         );
     }
-}
-
-ReactDOM.render(<App titolo="Titolo App" welcome="Benvenuto nella nostra app"  />,document.getElementById("root")); 
+ }
+ 
+ReactDOM.render(<App />, document.getElementById("root")); 
